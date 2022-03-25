@@ -6,7 +6,7 @@ The official [Operand](https://operand.ai) Go client library.
 
 ## Installation
 
-Requires Go modules (e.g., `go.mod` file).
+Requires Go modules (e.g., `go.mod` file) & Go 1.18+.
 
 ```sh
 go get -u github.com/operandinc/operand-go
@@ -30,12 +30,12 @@ client := operand.NewClient("<your-api-key>")
 
 ctx := context.Background()
 
-collection, err := operand.GetCollection(ctx, "Discord Conversations")
+collection, err := client.GetCollection(ctx, "Discord Conversations")
 if err != nil {
     // handle error
 }
 
-group, err := operand.CreateGroup(ctx, &operand.CreateGroupRequest{
+group, err := client.CreateGroup(ctx, &operand.CreateGroupRequest{
     CollectionID: collection.ID,
     Name: "DMs with Furqan",
 })
@@ -43,7 +43,7 @@ if err != nil {
     // handle error
 }
 
-atom, err := operand.CreateAtom(ctx, &operand.CreateAtomRequest{
+atom, err := client.CreateAtom(ctx, &operand.CreateAtomRequest{
     GroupID: group.ID,
     Content: "should be free up around 6",
     Properties: operand.Properties{
